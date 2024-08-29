@@ -1,4 +1,11 @@
-import { CHANGE_PLAYER, EDIT_BOXES, RESET_GAME } from "./types";
+import { toValidateWinner } from "../utils/toValidateWinner";
+import {
+  CHANGE_PLAYER,
+  EDIT_BOXES,
+  FINISH_GAME,
+  RESET_GAME,
+  VALIDATE_WINNER,
+} from "./types";
 
 const initialState = {
   boxes: [
@@ -7,6 +14,9 @@ const initialState = {
     [null, null, null],
   ],
   player: 1,
+  isWinner: null,
+  whoIsWinner: null,
+  isFinishGame: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -29,6 +39,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         player: action.payload,
       };
+    case VALIDATE_WINNER:
+      const validateIsWinner = toValidateWinner(state.boxes);
+      return {
+        ...state,
+        isWinner: validateIsWinner,
+      };
+    case FINISH_GAME: {
+      return {
+        ...state,
+        isFinishGame: true,
+      };
+    }
     default:
       return state;
   }

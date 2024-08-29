@@ -15,6 +15,7 @@ const Box = ({ value = "", coordinates }) => {
 
   const handleClick = () => {
     const character = store.player === 1 ? "X" : "O";
+
     dispatch({
       type: EDIT_BOXES,
       payload: { coordinates: coordinates, value: character },
