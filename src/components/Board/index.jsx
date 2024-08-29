@@ -8,13 +8,13 @@ const Board = () => {
   const [store, dispatch] = useContext(AppContext);
 
   useEffect(() => {
-    // const finishGame = store.boxes
-    //   .flatMap((box) => box)
-    //   .every((box) => box !== null);
-    // dispatch({ type: VALIDATE_WINNER });
-    // if (finishGame || store.isWinner) {
-    //   dispatch({ type: FINISH_GAME });
-    // }
+    const finishGame = store.boxes
+      .flatMap((box) => box)
+      .every((box) => box !== null);
+    dispatch({ type: VALIDATE_WINNER });
+    if (finishGame || store.isWinner) {
+      dispatch({ type: FINISH_GAME });
+    }
   }, [store.player]);
 
   return (
