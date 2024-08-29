@@ -19,12 +19,27 @@ const Board = () => {
 
   return (
     <section className={styles.Board}>
+      {/* Juego */}
       {!store.isFinishGame &&
         store.boxes.map((row, rowId) => {
           return row.map((box, columnId) => (
             <Box value={box} coordinates={[rowId, columnId]} />
           ));
         })}
+      {/* Ganador */}
+      {store.isFinishGame && store.isWinner && (
+        <section>
+          <p>El ganador es el Player N°{store.whoIsWinner}</p>
+          <button>Reiniciar</button>
+        </section>
+      )}
+      {/* Empate */}
+      {store.isFinishGame && !store.isWinner && (
+        <section>
+          <p>Empate</p>
+          <button>Reiniciar</button>
+        </section>
+      )}
     </section>
   );
 };

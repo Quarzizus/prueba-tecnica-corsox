@@ -49,6 +49,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isFinishGame: true,
+        whoIsWinner: state.player === 1 ? 2 : 1,
       };
     }
     default:

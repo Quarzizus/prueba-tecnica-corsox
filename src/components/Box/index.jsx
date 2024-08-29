@@ -24,11 +24,11 @@ const Box = ({ value = "", coordinates }) => {
       type: EDIT_BOXES,
       payload: { coordinates: coordinates, value: character },
     });
+    dispatch({ type: VALIDATE_WINNER });
     dispatch({
       type: CHANGE_PLAYER,
       payload: store.player === 1 ? 2 : 1,
     });
-    dispatch({ type: VALIDATE_WINNER });
   };
 
   return (
