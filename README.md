@@ -1,8 +1,17 @@
-# React + Vite
+# Prueba tecnica Corsox
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Versiones:
 
-Currently, two official plugins are available:
+Node.js: V22.3.0
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+npm: 10.8.1
+
+## Tareas faltantes:
+
+- Validar al ganador: Las funciones están hechas en utils. La idea es implementarlas dentro de board teniendo en cuenta dos factores:
+
+- Añadir el boton de reset: Si bien la función ya está dentro del reducer, es necesario primero validar al ganador antes dé.
+
+- Cuando apretamos en una casilla de otro jugador en nuestro turno automaticamente perdemos este turno. Ajustar de acuerdo al comportamiento deseado.
+
+Nota: Calculo 1 hora más de tiempo para terminarlo con todos sus requisitos. Se envió a la hora limite para cumplir con la prueba.
