@@ -1,4 +1,4 @@
-import { EDIT_BOXES, RESET_GAME } from "./types";
+import { CHANGE_PLAYER, EDIT_BOXES, RESET_GAME } from "./types";
 
 const initialState = {
   boxes: [
@@ -6,6 +6,7 @@ const initialState = {
     [null, null, null],
     [null, null, null],
   ],
+  player: 1,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,11 @@ const reducer = (state = initialState, action) => {
     case RESET_GAME: {
       return initialState;
     }
+    case CHANGE_PLAYER:
+      return {
+        ...state,
+        player: action.payload,
+      };
     default:
       return state;
   }
