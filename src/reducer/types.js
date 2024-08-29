@@ -1,0 +1,4 @@
+const EDIT_BOXES = "EDIT_BOXES";
+const RESET_GAME = "RESET_GAME";
+
+export { EDIT_BOXES, RESET_GAME };

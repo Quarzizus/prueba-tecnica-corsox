@@ -1,17 +1,13 @@
-import { useState } from "react";
+import { useContext } from "react";
 import styles from "./styles.module.scss";
 import { Box } from "../Box";
+import { AppContext } from "../../context/appContext";
 
 const Board = () => {
-  const [boxes, setBoxes] = useState([
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ]);
-
+  const [store] = useContext(AppContext);
   return (
     <section className={styles.Board}>
-      {boxes.map((row, rowId) => {
+      {store.boxes.map((row, rowId) => {
         return row.map((box, columnId) => (
           <Box value={box} coordinates={[rowId, columnId]} />
         ));
