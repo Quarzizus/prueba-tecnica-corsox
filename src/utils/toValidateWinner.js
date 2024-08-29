@@ -2,48 +2,43 @@ import { getPrincipalDiagonal, getSecondaryDiagonal } from "./getDiagonals";
 import { transposedMatrix } from "./trasposedMatrix";
 
 const boxesMock = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
+  ["O", "X", "O"],
+  ["O", "O", "X"],
+  ["O", "O", "X"],
 ];
 
 const toValidateWinner = (boxes = boxesMock) => {
   let isWinner = false;
+  const casesWinners = ["XXX", "OOO"];
   const trasposedBoard = transposedMatrix(boxes);
   const principalDiagonal = getPrincipalDiagonal(boxes);
   const secondaryDiagonal = getSecondaryDiagonal(boxes);
 
   // case 1
   boxes.forEach((column) => {
-    column.every((box) => {
-      if (box === "X" || box === "O") {
-        isWinner = true;
-      }
-    });
+    if (casesWinners.includes(column.join(""))) {
+      isWinner = true;
+      return isWinner;
+    }
   });
 
   // case 2
   trasposedBoard.forEach((column) => {
-    column.every((box) => {
-      if (box === "X" || box === "O") {
-        isWinner = true;
-      }
-    });
+    if (casesWinners.includes(column.join(""))) {
+      isWinner = true;
+      return isWinner;
+    }
   });
 
   // case 3
-  principalDiagonal.every((box) => {
-    if (box === "X" || box === "O") {
-      isWinner = true;
-    }
-  });
+  if (casesWinners.includes(principalDiagonal.join(""))) {
+    isWinner = true;
+  }
 
   // case 4
-  secondaryDiagonal.every((box) => {
-    if (box === "X" || box === "O") {
-      isWinner = true;
-    }
-  });
+  if (casesWinners.includes(secondaryDiagonal.join(""))) {
+    isWinner = true;
+  }
 
   return isWinner;
 };
