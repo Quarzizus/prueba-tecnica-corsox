@@ -1,4 +1,3 @@
-import { toValidateWinner } from "../utils/toValidateWinner";
 import {
   CHANGE_PLAYER,
   EDIT_BOXES,
@@ -21,16 +20,12 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case EDIT_BOXES:
-      const { coordinates, value } = action.payload;
-      let newBoxes = state.boxes;
-      if (newBoxes[coordinates[0]][coordinates[1]] !== null)
-        return { ...state };
-      newBoxes[coordinates[0]][coordinates[1]] = value;
+    case EDIT_BOXES: {
       return {
         ...state,
-        boxes: newBoxes,
+        boxes: action.payload,
       };
+    }
     case RESET_GAME: {
       return initialState;
     }
@@ -40,16 +35,15 @@ const reducer = (state = initialState, action) => {
         player: action.payload,
       };
     case VALIDATE_WINNER:
-      const validateIsWinner = toValidateWinner(state.boxes);
       return {
         ...state,
-        isWinner: validateIsWinner,
+        isWinner: action.payload,
       };
     case FINISH_GAME: {
       return {
         ...state,
         isFinishGame: true,
-        whoIsWinner: state.player === 1 ? 2 : 1,
+        whoIsWinner: action.payload,
       };
     }
     default:
