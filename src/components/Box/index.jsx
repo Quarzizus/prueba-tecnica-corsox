@@ -23,6 +23,9 @@ const Box = ({ value = "", coordinates }) => {
 
   const handlePlay = async () => {
     const character = store.player === 1 ? "#" : "&";
+    const target = store.boxes[coordinates[0]][coordinates[1]];
+
+    if (!!target) return store.boxes;
 
     const newBoxes = getNewBoxes({
       coordinates,
