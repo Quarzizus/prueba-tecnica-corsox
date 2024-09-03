@@ -7,7 +7,7 @@ import { transposedMatrix } from "../utils/trasposedMatrix";
 const useValidateGame = () => {
   const winnerCases = ["###", "&&&"];
   let isWinner = false;
-  const handleValidate = (boxes) => {
+  const validateGame = (boxes) => {
     const boxesTrasposed = transposedMatrix(boxes);
     const principalDiagonal = getPrincipalDiagonal(boxes);
     const secondaryDiagonal = getSecondaryDiagonal(boxes);
@@ -36,7 +36,7 @@ const useValidateGame = () => {
     return isWinner;
   };
 
-  return { handleValidate };
+  return { validateGame };
 };
 
 export { useValidateGame };
