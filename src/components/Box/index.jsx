@@ -15,7 +15,7 @@ import { toValidateFinish } from "../../utils/toValidateFinish";
 
 const Box = ({ value = "", coordinates }) => {
   const [store, dispatch] = useContext(AppContext);
-  const { handleValidate } = useValidateGame();
+  const { validateGame } = useValidateGame();
   const icons = {
     "#": Equix,
     "&": Circle,
@@ -23,6 +23,7 @@ const Box = ({ value = "", coordinates }) => {
 
   const handlePlay = async () => {
     const character = store.player === 1 ? "#" : "&";
+
     const newBoxes = getNewBoxes({
       coordinates,
       value: character,
@@ -38,21 +39,22 @@ const Box = ({ value = "", coordinates }) => {
   const handleChangePlayer = (nextPlayer) => {
     dispatch({ type: CHANGE_PLAYER, payload: nextPlayer });
   };
-
+  const handleValidate = (isWinner) => {
+    dispatch({ type: VALIDATE_WINNER, payload: isWinner });
+  };
   const handleFinish = () => {
     dispatch({ type: FINISH_GAME, payload: store.player });
   };
 
   const handleClick = async () => {
-    const nextPlayer = store.player === 1 ? 2 : 1;
     const { isWinner, isFinish } = await handlePlay().then((newBoxes) => {
-      const isWinner = handleValidate(newBoxes);
+      const isWinner = validateGame(newBoxes);
       const isFinish = toValidateFinish(newBoxes);
+      handleValidate(isWinner);
       return { isWinner, isFinish };
     });
-    dispatch({ type: VALIDATE_WINNER, payload: isWinner });
-
     if (isFinish || isWinner) return handleFinish();
+    const nextPlayer = store.player === 1 ? 2 : 1;
     handleChangePlayer(nextPlayer);
   };
 
