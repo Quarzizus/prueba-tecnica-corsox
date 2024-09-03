@@ -33,11 +33,13 @@ const toValidateWinner = (boxes = boxesMock) => {
   // case 3
   if (casesWinners.includes(principalDiagonal.join(""))) {
     isWinner = true;
+    return true;
   }
 
   // case 4
   if (casesWinners.includes(secondaryDiagonal.join(""))) {
     isWinner = true;
+    return true;
   }
 
   return isWinner;
