@@ -1,21 +1,15 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import styles from "./styles.module.scss";
 import { Box } from "../Box";
 import { AppContext } from "../../context/appContext";
-import { FINISH_GAME, VALIDATE_WINNER } from "../../reducer/types";
+import { RESET_GAME } from "../../reducer/types";
 
 const Board = () => {
   const [store, dispatch] = useContext(AppContext);
 
-  useEffect(() => {
-    const finishGame = store.boxes
-      .flatMap((box) => box)
-      .every((box) => box !== null);
-    dispatch({ type: VALIDATE_WINNER });
-    if (finishGame || store.isWinner) {
-      dispatch({ type: FINISH_GAME });
-    }
-  }, [store.player]);
+  const handleClick = () => {
+    dispatch({ type: RESET_GAME });
+  };
 
   return (
     <section className={styles.Board}>
@@ -23,21 +17,21 @@ const Board = () => {
       {!store.isFinishGame &&
         store.boxes.map((row, rowId) => {
           return row.map((box, columnId) => (
-            <Box value={box} coordinates={[rowId, columnId]} />
+            <Box key={columnId} value={box} coordinates={[rowId, columnId]} />
           ));
         })}
       {/* Ganador */}
       {store.isFinishGame && store.isWinner && (
-        <section>
+        <section className={styles.container}>
           <p>El ganador es el Player N°{store.whoIsWinner}</p>
-          <button>Reiniciar</button>
+          <button onClick={handleClick}>Reiniciar</button>
         </section>
       )}
       {/* Empate */}
       {store.isFinishGame && !store.isWinner && (
-        <section>
+        <section className={styles.container}>
           <p>Empate</p>
-          <button>Reiniciar</button>
+          <button onClick={handleClick}>Reiniciar</button>
         </section>
       )}
     </section>
